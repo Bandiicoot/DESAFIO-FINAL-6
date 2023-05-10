@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "esnext",
     "moduleResolution": "node",
     "module": "CommonJS",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
   },
-  "files": ["server/index.ts"]
+  "files": ["./server/index.ts"]
 }

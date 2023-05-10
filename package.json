@@ -1,13 +1,10 @@
 {
-  "name": "Desafio-final-6",
+  "name": "desafio-final-6",
   "version": "1.0.0",
   "scripts": {
     "dev:front": "parcel serve ./client/index.html",
-    "dev:api": "nodemon --watch './server/index.ts' --exec ts-node ./server/index.ts ",
     "build:front": "parcel build ./client/index.html",
-    "build:api": "tsc ./server/index.ts ./server/index.js",
-    "build": "yarn build:front && yarn build:api",
-    "start": "node ./server/index.js"
+    "build": "yarn build:front"
   },
   "keywords": [],
   "author": "",
@@ -28,5 +25,13 @@
     "@parcel/transformer-image": "2.0.0-rc.0",
     "nodemon": "^2.0.22"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bandiicoot/DESAFIO-FINAL-6.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bandiicoot/DESAFIO-FINAL-6/issues"
+  },
+  "homepage": "https://github.com/Bandiicoot/DESAFIO-FINAL-6#readme",
   "description": ""
 }
