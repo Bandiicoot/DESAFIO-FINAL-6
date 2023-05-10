@@ -21,10 +21,7 @@
     "typescript": "^5.0.4",
     "uuid": "^9.0.0"
   },
-  "devDependencies": {
-    "@parcel/transformer-image": "2.0.0-rc.0",
-    "nodemon": "^2.0.22"
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Bandiicoot/DESAFIO-FINAL-6.git"
