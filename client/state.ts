@@ -4,7 +4,7 @@ import { rtdb } from "./db";
 import * as router from "./router";
 import { Console } from "console";
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = process.env.BACK_URL;
 
 type Played = "piedra" | "papel" | "tijera";
 
