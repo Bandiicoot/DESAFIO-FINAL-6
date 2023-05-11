@@ -6,5 +6,5 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
   },
-  "files": ["./server/index.ts"]
+  "files": ["./client/index.ts"]
 }
