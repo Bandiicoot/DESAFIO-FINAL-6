@@ -94,6 +94,7 @@ const state = {
       method: "GET",
       headers: {
         "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     })
       .then((res) => {
@@ -125,6 +126,7 @@ const state = {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         email: userSignupData.inputEmail,
@@ -163,6 +165,7 @@ const state = {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         email: userSignInData.inputEmail,
@@ -201,7 +204,10 @@ const state = {
     );
     await fetch(API_BASE_URL + "/createGameRoom", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({
         userId: this.data.currentGame.userId,
         userName: this.data.currentGame.userName,
