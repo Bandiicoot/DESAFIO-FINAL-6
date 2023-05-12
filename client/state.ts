@@ -94,6 +94,7 @@ const state = {
       method: "GET",
       headers: {
         "content-type": "application/json",
+        ////AGREGUE ESTO POR LO DEL CORS
         "Access-Control-Allow-Origin": "*",
       },
     })
