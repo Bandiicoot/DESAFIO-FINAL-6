@@ -94,6 +94,8 @@ const state = {
       method: "GET",
       headers: {
         "content-type": "application/json",
+        ////AGREGUE ESTO POR LO DEL CORS
+        "Access-Control-Allow-Origin": "*",
       },
     })
       .then((res) => {
@@ -125,6 +127,7 @@ const state = {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         email: userSignupData.inputEmail,
@@ -163,6 +166,7 @@ const state = {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         email: userSignInData.inputEmail,
