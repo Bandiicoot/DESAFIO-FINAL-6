@@ -217,6 +217,7 @@ const state = {
         return res.json();
       })
       .then((data) => {
+        console.log("Esta es la data que estamos probando", data);
         let cs = this.getState();
         (cs.currentGame.shortRoomId = data.shortId),
           (cs.currentGame.longRoomId = data.longRoomId);
