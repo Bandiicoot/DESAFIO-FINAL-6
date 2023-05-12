@@ -1,6 +1,6 @@
 import { Router } from "@vaadin/router";
 
-import { rtdb } from "./db";
+// import { rtdb } from "./db";
 import * as router from "./router";
 import { Console } from "console";
 
