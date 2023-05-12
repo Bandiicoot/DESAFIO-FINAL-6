@@ -207,7 +207,8 @@ const state = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin":
+          "https://desafio-final-6-back.onrender.com",
       },
       body: JSON.stringify({
         userId: this.data.currentGame.userId,
