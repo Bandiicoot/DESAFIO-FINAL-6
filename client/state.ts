@@ -28,8 +28,6 @@ const state = {
   },
   listeners: [],
 
-  createGameRoom() {},
-
   getStorage() {
     const localData = JSON.parse(localStorage.getItem("data") as string);
 
@@ -194,12 +192,12 @@ const state = {
       });
   },
 
-  async createRoom() {
+  async createRoom(userData) {
     console.log(
       this.getState(),
       "createRoom Recibió: ",
-      this.data.currentGame.userId,
-      this.data.currentGame.userName
+      userData.userId,
+      userData.userName
     );
     await fetch(API_BASE_URL + "/createGameRoom", {
       method: "POST",
@@ -207,8 +205,8 @@ const state = {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        userId: this.data.currentGame.userId,
-        userName: this.data.currentGame.userName,
+        userId: userData.userId,
+        userName: userData.userName,
       }),
     })
       .then((res) => {
