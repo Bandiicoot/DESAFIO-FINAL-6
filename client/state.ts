@@ -1,8 +1,9 @@
 import { Router } from "@vaadin/router";
 
 // import { rtdb } from "./db";
-import * as router from "./router";
+// import * as router from "./router";
 import { Console } from "console";
+import { createCipheriv } from "crypto";
 
 const API_BASE_URL = process.env.BACK_URL;
 
@@ -207,6 +208,7 @@ const state = {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         userId: this.data.currentGame.userId,
