@@ -76,9 +76,9 @@ customElements.define(
 
       const buttonEl: any = this.shadow.querySelector(".button");
       buttonEl.addEventListener("click", () => {
-        // var userName = state.data.currentGame.userName;
-        // var userId = state.data.currentGame.userId;
-        state.createRoom();
+        var userName = state.data.currentGame.userName;
+        var userId = state.data.currentGame.userId;
+        state.createRoom(userId, userName);
       });
 
       const buttonNewSala: any = this.shadow.querySelector(".buttonNewSala");
