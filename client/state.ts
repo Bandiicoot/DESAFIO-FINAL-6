@@ -202,6 +202,8 @@ const state = {
     );
     await fetch(API_BASE_URL + "/createGameRoom", {
       method: "POST",
+      mode: "cors",
+      credentials: "same-origin",
       headers: {
         "content-type": "application/json",
       },
