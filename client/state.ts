@@ -5,7 +5,10 @@ import { Router } from "@vaadin/router";
 import { Console } from "console";
 import { createCipheriv } from "crypto";
 // "http://localhost:3000"
-const API_BASE_URL = process.env.BACK_URL;
+const API_BASE_URL =
+  process.env.BACK_URL || "https://desafio-final-6-back.onrender.com";
+
+const FRONT_URL = "https://desafio-final-6.onrender.com";
 
 type Played = "piedra" | "papel" | "tijera";
 
@@ -193,33 +196,55 @@ const state = {
       });
   },
 
-  async createRoom() {
-    console.log(
-      // this.getState(),
-      "createRoom Recibió: ",
-      this.data.currentGame.userId,
-      this.data.currentGame.userName
-    );
+  // async createRoom() {
+  //   console.log(
+  //     // this.getState(),
+  //     "createRoom Recibió: ",
+  //     this.data.currentGame.userId,
+  //     this.data.currentGame.userName
+  //   );
+  //   await fetch(API_BASE_URL + "/createGameRoom", {
+  //     method: "POST",
+  //     mode: "cors",
+  //     credentials: "same-origin",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       userId: this.data.currentGame.userId,
+  //       userName: this.data.currentGame.userName,
+  //     }),
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log("Esta es la data que estamos probando", data);
+  //       let cs = this.getState();
+  //       (cs.currentGame.shortRoomId = data.shortId),
+  //         (cs.currentGame.longRoomId = data.longRoomId);
+  //       this.setState(cs);
+  //       window.alert("Sala creada!");
+  //       Router.go("/desafio-final-five/pasarCodigoRoom");
+  //     });
+  // },
+
+  async createRoom(userId, userName) {
+    console.log("createRoom Recibió: ", userId);
     await fetch(API_BASE_URL + "/createGameRoom", {
       method: "POST",
-      mode: "cors",
-      credentials: "same-origin",
-      headers: {
-        "content-type": "application/json",
-      },
+      headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        userId: this.data.currentGame.userId,
-        userName: this.data.currentGame.userName,
+        userId: userId,
+        userName: userName,
       }),
     })
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        console.log("Esta es la data que estamos probando", data);
         let cs = this.getState();
-        (cs.currentGame.shortRoomId = data.shortId),
-          (cs.currentGame.longRoomId = data.longRoomId);
+        (cs.shortRoomId = data.shortId), (cs.longRoomId = data.longRoomId);
         this.setState(cs);
         window.alert("Sala creada!");
         Router.go("/desafio-final-five/pasarCodigoRoom");
