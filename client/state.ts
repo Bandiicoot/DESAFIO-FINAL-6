@@ -192,12 +192,12 @@ const state = {
       });
   },
 
-  async createRoom(userData) {
+  async createRoom() {
     console.log(
       this.getState(),
       "createRoom Recibió: ",
-      userData.json().userId,
-      userData.json().userName
+      this.data.currentGame.userId,
+      this.data.currentGame.userName
     );
     await fetch(API_BASE_URL + "/createGameRoom", {
       method: "POST",
@@ -205,8 +205,8 @@ const state = {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        userId: userData.userId,
-        userName: userData.userName,
+        userId: this.data.currentGame.userId,
+        userName: this.data.currentGame.userName,
       }),
     })
       .then((res) => {
