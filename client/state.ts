@@ -4,7 +4,7 @@ import { Router } from "@vaadin/router";
 // import * as router from "./router";
 import { Console } from "console";
 import { createCipheriv } from "crypto";
-
+// "http://localhost:3000"
 const API_BASE_URL = process.env.BACK_URL;
 
 type Played = "piedra" | "papel" | "tijera";
@@ -20,6 +20,7 @@ const state = {
       userId: "",
       shortRoomId: 0,
       longRoomId: 0,
+      userPassword: "",
     },
     history: {
       myScore: 0,
@@ -105,15 +106,15 @@ const state = {
         } else if (data.rtdbRoomid) {
           let cs = this.getState();
           console.log("currentState: ", cs);
-          cs.shortRoomId = shortRoomIdReceived;
-          cs.longRoomId = data.rtdbRoomid;
+          cs.currentGame.shortRoomId = shortRoomIdReceived;
+          cs.currentGame.longRoomId = data.rtdbRoomid;
 
           this.setState(cs);
           // window.alert("Sala encontrada!");
           this.joinRoom({
             longRoomId: data.rtdbRoomid,
-            userId: this.data.userData.userId,
-            userName: this.data.userData.userName,
+            userId: this.data.currentGame.userId,
+            userName: this.data.currentGame.userName,
           });
         }
       });
@@ -141,14 +142,14 @@ const state = {
         } else {
           let cs = this.getState();
 
-          cs.userEmail = userSignupData.inputEmail;
-          cs.userPassword = userSignupData.inputPassword;
-          cs.userName = userSignupData.inputName;
+          cs.currentGame.userEmail = userSignupData.inputEmail;
+          cs.currentGame.userPassword = userSignupData.inputPassword;
+          cs.currentGame.userName = userSignupData.inputName;
 
-          cs.userId = data.id;
+          cs.currentGame.userId = data.id;
 
-          console.log("getState: ", this.getState());
           this.setState(cs);
+          console.log("getState: ", this.getState());
 
           Router.go("/desafio-final-five/welcome");
 
@@ -194,7 +195,7 @@ const state = {
 
   async createRoom() {
     console.log(
-      this.getState(),
+      // this.getState(),
       "createRoom Recibió: ",
       this.data.currentGame.userId,
       this.data.currentGame.userName
