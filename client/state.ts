@@ -229,14 +229,20 @@ const state = {
   //     });
   // },
 
-  async createRoom(userId, userName) {
-    console.log("createRoom Recibió: ", userId);
+  async createRoom() {
+    console.log(
+      "createRoom Recibió: ",
+      this.data.currentGame.userId,
+      this.data.currentGame.userName
+    );
     await fetch(API_BASE_URL + "/createGameRoom", {
       method: "POST",
+      mode: "cors",
+      credentials: "same-origin",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        userId: userId,
-        userName: userName,
+        userId: this.data.currentGame.userId,
+        userName: this.data.currentGame.userName,
       }),
     })
       .then((res) => {
@@ -244,7 +250,8 @@ const state = {
       })
       .then((data) => {
         let cs = this.getState();
-        (cs.shortRoomId = data.shortId), (cs.longRoomId = data.longRoomId);
+        (cs.currentGame.shortRoomId = data.shortId),
+          (cs.currentGame.longRoomId = data.longRoomId);
         this.setState(cs);
         window.alert("Sala creada!");
         Router.go("/desafio-final-five/pasarCodigoRoom");
