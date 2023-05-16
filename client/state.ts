@@ -196,8 +196,8 @@ const state = {
     console.log(
       this.getState(),
       "createRoom Recibió: ",
-      userData.userId,
-      userData.userName
+      userData.json().userId,
+      userData.json().userName
     );
     await fetch(API_BASE_URL + "/createGameRoom", {
       method: "POST",
