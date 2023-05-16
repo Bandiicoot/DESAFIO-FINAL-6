@@ -229,20 +229,16 @@ const state = {
   //     });
   // },
 
-  async createRoom() {
-    console.log(
-      "createRoom Recibió: ",
-      this.data.currentGame.userId,
-      this.data.currentGame.userName
-    );
+  async createRoom(userId, userName) {
+    console.log("createRoom Recibió: ", userId, userName);
     await fetch(API_BASE_URL + "/createGameRoom", {
       method: "POST",
       mode: "cors",
       credentials: "same-origin",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        userId: this.data.currentGame.userId,
-        userName: this.data.currentGame.userName,
+        userId: userId,
+        userName: userName,
       }),
     })
       .then((res) => {
