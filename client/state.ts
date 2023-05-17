@@ -5,7 +5,8 @@ import { Router } from "@vaadin/router";
 import { Console } from "console";
 // import { createCipheriv } from "crypto";
 // "https://desafio-final-6-back.onrender.com" process.env.BACK_URL || "http://localhost:3000"
-const API_BASE_URL = "https://desafio-final-6-back.onrender.com";
+const API_BASE_URL =
+  process.env.PORT || "https://desafio-final-6-back.onrender.com";
 
 // const FRONT_URL = "https://desafio-final-6.onrender.com";
 
