@@ -3,8 +3,8 @@ import { Router } from "@vaadin/router";
 // import { rtdb } from "./db";
 // import * as router from "./router";
 import { Console } from "console";
-// import { createCipheriv } from "crypto";
-// "https://desafio-final-6-back.onrender.com"
+import { createCipheriv } from "crypto";
+// "http://localhost:3000"
 const API_BASE_URL =
   process.env.BACK_URL || "https://desafio-final-6-back.onrender.com";
 
