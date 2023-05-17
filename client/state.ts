@@ -4,11 +4,11 @@ import { Router } from "@vaadin/router";
 // import * as router from "./router";
 import { Console } from "console";
 // import { createCipheriv } from "crypto";
-// "https://desafio-final-6-back.onrender.com" process.env.BACK_URL || "http://localhost:3000"
+// "https://desafio-final-6-back.onrender.com"
 const API_BASE_URL =
-  process.env.PORT || "https://desafio-final-6-back.onrender.com";
+  process.env.BACK_URL || "https://desafio-final-6-back.onrender.com";
 
-// const FRONT_URL = "https://desafio-final-6.onrender.com";
+const FRONT_URL = "https://desafio-final-6.onrender.com";
 
 type Played = "piedra" | "papel" | "tijera";
 
