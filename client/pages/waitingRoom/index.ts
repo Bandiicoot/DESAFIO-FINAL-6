@@ -55,15 +55,23 @@ customElements.define(
             position:relative ;
             max-width: 100%; 
         }
+        h3{
+          color: #0249d6;
+          margin: 0 auto;
+          font-size: 2.5em;
+          font-family: cursive;
+          text-align: center;
+        }
         `;
 
       this.shadow.innerHTML = `
         <div class="container">
         
+        <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
+        
         <h1 class="title">Piedra Papel ó Tijera</h1>
         <button-start class="button">Estoy listo</button-start>
 
-        <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         
         <div class="container-hands">
         <div class="hand"><movimiento-de-manos hand="piedra"></movimiento-de-manos></div>
