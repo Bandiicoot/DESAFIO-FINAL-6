@@ -62,6 +62,8 @@ customElements.define(
         
         <h1 class="title">Piedra Papel ó Tijera</h1>
         <button-start class="button">Estoy listo</button-start>
+
+        <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         
         <div class="container-hands">
         <div class="hand"><movimiento-de-manos hand="piedra"></movimiento-de-manos></div>
