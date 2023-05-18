@@ -140,7 +140,7 @@ const state = {
         return res.json();
       })
       .then((data) => {
-        if (data.message == "El email ya esta en uso, por favor ingrese otro") {
+        if (data.message == "El email ya esta en uso, por favor ingresa otro") {
           window.alert(data.message);
         } else {
           let cs = this.getState();

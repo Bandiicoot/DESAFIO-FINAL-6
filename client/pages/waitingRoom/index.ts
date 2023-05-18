@@ -56,13 +56,14 @@ customElements.define(
             max-width: 100%; 
         }
         `;
+      this.shadow.appendChild(style);
       this.shadow.innerHTML = `
         <div class="container">
    
        <h1 class="title">Piedra Papel ó Tijera</h1>
        <button-start class="button">Estoy listo</button-start>
+
        <div class="container-hands">
-   
        <div class="hand"><movimiento-de-manos hand="piedra"></movimiento-de-manos></div>
        <div class="hand"><movimiento-de-manos hand="papel"></movimiento-de-manos></div>
        <div class="hand"><movimiento-de-manos hand="tijera"></movimiento-de-manos></div>
