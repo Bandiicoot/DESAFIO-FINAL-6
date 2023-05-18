@@ -67,9 +67,9 @@ customElements.define(
       this.shadow.innerHTML = `
         <div class="container">
         
-        <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         
         <h1 class="title">Piedra Papel ó Tijera</h1>
+        <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         <button-start class="button">Estoy listo</button-start>
 
         
