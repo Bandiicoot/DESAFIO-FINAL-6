@@ -178,13 +178,13 @@ customElements.define(
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         <button class="btn-hover root color botonListo">Estoy listo</button>
           
-        <div class="loaderContainer">
-         <div class="cargando" style="display:none;" id="cargando">
+     
+         <div class="cargando" id="cargando">
            <div class="pelotas"></div>
            <div class="pelotas"></div>
            <div class="pelotas"></div>
       </div>
-    </div>
+  
     
         <button-start class="button volver">Volver</button-start>
 
@@ -198,13 +198,14 @@ customElements.define(
         </div>`;
       this.shadow.appendChild(style);
 
-      const loaderButtons = document.getElementById("cargando");
+      const cargandoEl = (document.getElementById("cargando").style.display =
+        "none") as any;
       const buttonListoEl = this.shadow.querySelector(".botonListo");
 
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton listo");
         buttonListoEl.textContent = "Esperando";
-        loaderButtons.style.display = "block";
+        cargandoEl.style.display = "block";
       });
 
       const goBackButtonEl = this.shadow.querySelector(".volver");
