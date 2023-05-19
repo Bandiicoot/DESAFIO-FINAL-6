@@ -180,13 +180,13 @@ customElements.define(
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         <button class="btn-hover root color botonListo">Estoy listo</button>
           
-     
+     <div class="loaderContainer">
          <div class="cargando" id="cargando">
            <div class="pelotas"></div>
            <div class="pelotas"></div>
            <div class="pelotas"></div>
       </div>
-  
+      </div>  
     
         <button-start class="button volver">Volver</button-start>
 
