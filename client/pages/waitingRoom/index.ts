@@ -180,7 +180,7 @@ customElements.define(
         <h1 class="title">Piedra Papel ó Tijera</h1>
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         <button class="btn-hover root color botonListo">Estoy listo</button>
-        <button-start><div class="loader" id="loader">...</div></button-start>
+        <div class="loader" id="loader">...</div>
         <button-start class="button volver">Volver</button-start>
 
         <div class="container-hands">
