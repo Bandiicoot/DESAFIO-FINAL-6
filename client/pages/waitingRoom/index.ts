@@ -70,7 +70,7 @@ customElements.define(
         
         <h1 class="title">Piedra Papel ó Tijera</h1>
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
-        <button-start class="button listo">Estoy listo</button-start>
+        <button-start class="button" id="botonListo">Estoy listo</button-start>
         <button-start class="button volver">Volver</button-start>
 
         <div class="container-hands">
@@ -83,14 +83,14 @@ customElements.define(
         </div>`;
       this.shadow.appendChild(style);
 
-      const buttonEl = this.shadow.querySelector(".listo");
+      const buttonEl = this.shadow.getElementById("botonListo");
       buttonEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton");
         buttonEl.textContent = "Esperando...";
       });
       const goBackButtonEl = this.shadow.querySelector(".volver");
       goBackButtonEl.addEventListener("click", () => {
-        Router.go("/desafio-final-five/home");
+        Router.go("/desafio-final-five/welcome");
       });
     }
   }
