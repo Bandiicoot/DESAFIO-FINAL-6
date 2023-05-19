@@ -128,7 +128,7 @@ customElements.define(
   }
   .cargando{
       width: 120px;
-      height: 30px;
+      height: 85px;
       display: flex;
       flex-wrap: wrap;
       align-items: flex-end;
