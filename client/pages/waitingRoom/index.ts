@@ -83,10 +83,10 @@ customElements.define(
         </div>`;
       this.shadow.appendChild(style);
 
-      const buttonEl = this.shadow.getElementById("botonListo");
-      buttonEl.addEventListener("click", () => {
+      const buttonListoEl = this.shadow.querySelector("botonListo");
+      buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton");
-        buttonEl.textContent = "Esperando...";
+        buttonListoEl.textContent = "Esperando...";
       });
       const goBackButtonEl = this.shadow.querySelector(".volver");
       goBackButtonEl.addEventListener("click", () => {
