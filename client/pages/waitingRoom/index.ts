@@ -166,7 +166,9 @@ customElements.define(
       }
   }
 
-
+.cargando{
+  display:none;
+}
 
         `;
 
@@ -179,7 +181,7 @@ customElements.define(
         <button class="btn-hover root color botonListo">Estoy listo</button>
           
      
-         <div display="none" class="cargando" id="cargando">
+         <div class="cargando" id="cargando">
            <div class="pelotas"></div>
            <div class="pelotas"></div>
            <div class="pelotas"></div>
@@ -198,13 +200,15 @@ customElements.define(
         </div>`;
       this.shadow.appendChild(style);
 
-      const juanjoCagando = this.shadow.querySelector(".cargando");
+      const juanjoCagando = this.shadow.querySelector(
+        ".cargando"
+      ) as HTMLElement;
 
       const buttonListoEl = this.shadow.querySelector(".botonListo");
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton listo");
         buttonListoEl.textContent = "Esperando";
-        juanjoCagando.removeAttribute("display");
+        juanjoCagando.style.display = "block";
       });
 
       const goBackButtonEl = this.shadow.querySelector(".volver");
