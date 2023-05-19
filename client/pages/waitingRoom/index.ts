@@ -83,7 +83,7 @@ customElements.define(
         </div>`;
       this.shadow.appendChild(style);
 
-      const buttonListoEl = this.shadow.querySelector(".root")[0];
+      const buttonListoEl = this.shadow.querySelector(".root");
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton");
         buttonListoEl.textContent = "Esperando...";
