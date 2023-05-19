@@ -62,6 +62,59 @@ customElements.define(
           font-family: cursive;
           text-align: center;
         }
+
+        .root{
+          font-size: 35px;
+         //  color: #D8FCFC;
+         //  background-color: #006CFC;
+         //  border: 10px solid #001997;
+           padding: 10px 87px;
+         //  cursor: pointer;
+         //  border-radius:45%;
+         margin: 0 auto;
+       }
+
+       .btn-hover {
+         width:auto !important;
+         // font-size: 16px;
+         font-weight: 600;
+         color: #fff;
+         cursor: pointer;
+         margin: 20px;
+         height: 100px;
+         text-align:center;
+         border: none;
+         background-size: 300% 100%;
+     
+         border-radius: 50px;
+         moz-transition: all .4s ease-in-out;
+         -o-transition: all .4s ease-in-out;
+         -webkit-transition: all .4s ease-in-out;
+         transition: all .4s ease-in-out;
+     }
+     
+     .btn-hover:hover {
+         background-position: 100% 0;
+         moz-transition: all .4s ease-in-out;
+         -o-transition: all .4s ease-in-out;
+         -webkit-transition: all .4s ease-in-out;
+         transition: all .4s ease-in-out;
+     }
+     
+     .btn-hover:focus {
+         outline: none;
+     }
+     
+     .btn-hover.color {
+         background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+         box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+     } 
+
+
+
+
+
+
         `;
 
       this.shadow.innerHTML = `
@@ -70,7 +123,7 @@ customElements.define(
         
         <h1 class="title">Piedra Papel ó Tijera</h1>
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
-        <button-start class="button" id="botonListo">Estoy listo</button-start>
+        <button class="btn-hover root botonListo">Estoy listo</button>
         <button-start class="button volver">Volver</button-start>
 
         <div class="container-hands">
@@ -83,7 +136,7 @@ customElements.define(
         </div>`;
       this.shadow.appendChild(style);
 
-      const buttonListoEl = this.shadow.querySelector(".root");
+      const buttonListoEl = this.shadow.querySelector(".botonListo");
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton");
         buttonListoEl.textContent = "Esperando...";
