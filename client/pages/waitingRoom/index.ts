@@ -85,6 +85,7 @@ customElements.define(
 
       const buttonEl = this.shadow.querySelector(".listo");
       buttonEl.addEventListener("click", () => {
+        console.log("Estoy tocando el boton");
         buttonEl.textContent = "Esperando...";
       });
       const goBackButtonEl = this.shadow.querySelector(".volver");
