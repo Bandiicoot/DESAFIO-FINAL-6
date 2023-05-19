@@ -179,7 +179,7 @@ customElements.define(
         <button class="btn-hover root color botonListo">Estoy listo</button>
           
      
-         <div class="cargando" id="cargando" hidden>
+         <div display="none" class="cargando" id="cargando">
            <div class="pelotas"></div>
            <div class="pelotas"></div>
            <div class="pelotas"></div>
@@ -204,7 +204,7 @@ customElements.define(
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton listo");
         buttonListoEl.textContent = "Esperando";
-        juanjoCagando.removeAttribute("hidden");
+        juanjoCagando.removeAttribute("display");
       });
 
       const goBackButtonEl = this.shadow.querySelector(".volver");
