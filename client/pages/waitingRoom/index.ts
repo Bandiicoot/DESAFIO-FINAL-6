@@ -114,56 +114,7 @@ customElements.define(
     /*=========*/
 
 
-     body{
-      font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-      background-color: #FFF;
-      color: #00b8de;
-  }
-  /* ======================== */
-  .loaderContainer{   
-   // display: grid;
-    //  place-content: center;
-      height: 100px;
-  }
-  .cargando{
-      width: 120px;
-      height: 85px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
-    margin: 0 auto; 
-  }
-  .texto-cargando{ 
-    padding-top:20px
-  }
-  .cargando span{
-      font-size: 20px;
-      text-transform: uppercase;
-  }
-  .pelotas {
-      width: 30px;
-      height: 30px;
-      background-color: #00b8de;
-      animation: salto .5s alternate
-      infinite;
-    border-radius: 50%  
-  }
-  .pelotas:nth-child(2) {
-      animation-delay: .18s;
-  }
-  .pelotas:nth-child(3) {
-      animation-delay: .37s;
-  }
-  @keyframes salto {
-      from {
-          transform: scaleX(1.25);
-      }
-      to{
-          transform: 
-          translateY(-50px) scaleX(1);
-      }
+    
   }
 
 
@@ -178,12 +129,7 @@ customElements.define(
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         <button class="btn-hover root color botonListo">Estoy listo</button>
           
-     
-         <div class="cargando" id="cargando">
-           <div class="pelotas"></div>
-           <div class="pelotas"></div>
-           <div class="pelotas"></div>
-      </div>
+    
   
     
         <button-start class="button volver">Volver</button-start>
@@ -198,14 +144,72 @@ customElements.define(
         </div>`;
       this.shadow.appendChild(style);
 
-      const cargandoEl = (document.getElementById("cargando").style.display =
-        "none") as any;
       const buttonListoEl = this.shadow.querySelector(".botonListo");
 
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton listo");
         buttonListoEl.textContent = "Esperando";
-        cargandoEl.style.display = "block";
+
+        var styles = document.createElement("style");
+        styles.innerHTML = `   body{
+        font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+        background-color: #FFF;
+        color: #00b8de;
+    }
+    /* ======================== */
+    .loaderContainer{   
+     // display: grid;
+      //  place-content: center;
+        height: 100px;
+    }
+    .cargando{
+        width: 120px;
+        height: 85px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+      margin: 0 auto; 
+    }
+    .texto-cargando{ 
+      padding-top:20px
+    }
+    .cargando span{
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+    .pelotas {
+        width: 30px;
+        height: 30px;
+        background-color: #00b8de;
+        animation: salto .5s alternate
+        infinite;
+      border-radius: 50%  
+    }
+    .pelotas:nth-child(2) {
+        animation-delay: .18s;
+    }
+    .pelotas:nth-child(3) {
+        animation-delay: .37s;
+    }
+    @keyframes salto {
+        from {
+            transform: scaleX(1.25);
+        }
+        to{
+            transform: 
+            translateY(-50px) scaleX(1);
+        }`;
+
+        this.shadow.innerHTML = ` 
+        <div class="cargando" id="cargando">
+          <div class="pelotas"></div>
+          <div class="pelotas"></div>
+          <div class="pelotas"></div>
+     </div>`;
+
+        this.shadow.appendChild(styles);
       });
 
       const goBackButtonEl = this.shadow.querySelector(".volver");
