@@ -122,9 +122,9 @@ customElements.define(
   }
   /* ======================== */
   .container{   
-    display: grid;
-      place-content: center;
-      height: 100vh;
+   // display: grid;
+    //  place-content: center;
+      height: 100px;
   }
   .cargando{
       width: 120px;
@@ -178,14 +178,14 @@ customElements.define(
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         <button class="btn-hover root color botonListo">Estoy listo</button>
           
-       
+        <div class="container">
          <div class="cargando">
            <div class="pelotas"></div>
            <div class="pelotas"></div>
            <div class="pelotas"></div>
           <span class="texto-cargando">Cargando...</span>
       </div>
-
+    </div>
     
         <button-start class="button volver">Volver</button-start>
 
