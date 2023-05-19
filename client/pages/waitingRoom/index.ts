@@ -208,7 +208,7 @@ customElements.define(
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton listo");
         buttonListoEl.textContent = "Esperando";
-        juanjoCagando.style.display = "block";
+        juanjoCagando.style.display = "grid";
       });
 
       const goBackButtonEl = this.shadow.querySelector(".volver");
