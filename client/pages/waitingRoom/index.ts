@@ -179,7 +179,7 @@ customElements.define(
         <button class="btn-hover root color botonListo">Estoy listo</button>
           
      
-         <div class="cargando" id="cargando" style="display:none">
+         <div class="cargando" id="cargando">
            <div class="pelotas"></div>
            <div class="pelotas"></div>
            <div class="pelotas"></div>
@@ -199,11 +199,12 @@ customElements.define(
       this.shadow.appendChild(style);
 
       const juanjoCagando = this.shadow.querySelector(".cargando");
+      juanjoCagando.classList.add("hidden");
       const buttonListoEl = this.shadow.querySelector(".botonListo");
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton listo");
         buttonListoEl.textContent = "Esperando";
-        juanjoCagando.classList.remove("style");
+        juanjoCagando.classList.remove("hidden");
       });
 
       const goBackButtonEl = this.shadow.querySelector(".volver");
