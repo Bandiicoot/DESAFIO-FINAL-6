@@ -179,7 +179,7 @@ customElements.define(
         <button class="btn-hover root color botonListo">Estoy listo</button>
           
         <div class="loaderContainer">
-         <div class="cargando">
+         <div class="cargando" style="display:none;" id="cargando">
            <div class="pelotas"></div>
            <div class="pelotas"></div>
            <div class="pelotas"></div>
@@ -198,13 +198,17 @@ customElements.define(
         </div>`;
       this.shadow.appendChild(style);
 
+      const loaderButtons = document.getElementById("cargando");
       const buttonListoEl = this.shadow.querySelector(".botonListo");
 
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton listo");
         buttonListoEl.textContent = "Esperando";
+        loaderButtons.style.display = "block";
       });
+
       const goBackButtonEl = this.shadow.querySelector(".volver");
+
       goBackButtonEl.addEventListener("click", () => {
         Router.go("/desafio-final-five/welcome");
       });
