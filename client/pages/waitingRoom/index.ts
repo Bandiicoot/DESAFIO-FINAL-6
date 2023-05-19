@@ -111,6 +111,62 @@ customElements.define(
      } 
 
 
+.loader:before,
+.loader:after,
+.loader {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load7 1.8s infinite ease-in-out;
+  animation: load7 1.8s infinite ease-in-out;
+}
+.loader {
+  margin: 8em auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation-delay: 0.16s;
+  animation-delay: 0.16s;
+}
+.loader:before {
+  left: -3.5em;
+}
+.loader:after {
+  left: 3.5em;
+  -webkit-animation-delay: 0.32s;
+  animation-delay: 0.32s;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+@-webkit-keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #ffffff;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #FFF;
+  }
+}
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #ffffff;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #FFF;
+  }
+}
+
+
+
 
 
 
@@ -123,7 +179,7 @@ customElements.define(
         
         <h1 class="title">Piedra Papel ó Tijera</h1>
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
-        <button class="btn-hover root color botonListo">Estoy listo</button>
+        <button class="btn-hover root color botonListo">Estoy listo<div class="loader" id="loader">...</div></button>
         <button-start class="button volver">Volver</button-start>
 
         <div class="container-hands">
