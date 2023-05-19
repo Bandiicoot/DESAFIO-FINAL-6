@@ -83,10 +83,9 @@ customElements.define(
         </div>`;
       this.shadow.appendChild(style);
 
-      const buttonEl: any = this.shadow.querySelector(".listo");
-      buttonEl.addEventListener("click", (e) => {
-        buttonEl.textContent = "Esperando";
-        buttonEl.style.color = "#32dd32";
+      const buttonEl = this.shadow.querySelector(".listo");
+      buttonEl.addEventListener("click", () => {
+        buttonEl.textContent = "Esperando...";
       });
       const goBackButtonEl = this.shadow.querySelector(".volver");
       goBackButtonEl.addEventListener("click", () => {
