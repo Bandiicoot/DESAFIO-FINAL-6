@@ -174,7 +174,7 @@ customElements.define(
         <div class="container">
         
         
-        <h1 class="title">Piedra Papel ó Tijera</h1>
+        <h1 class="title">Piedra Papel ó Tijeras</h1>
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
         <button class="btn-hover root color botonListo">Estoy listo</button>
           
@@ -183,7 +183,6 @@ customElements.define(
            <div class="pelotas"></div>
            <div class="pelotas"></div>
            <div class="pelotas"></div>
-          <span class="texto-cargando">Cargando...</span>
       </div>
     </div>
     
