@@ -179,7 +179,7 @@ customElements.define(
         
         <h1 class="title">Piedra Papel ó Tijera</h1>
         <h3 class ="texto"> Cuando ambos jugadores pongan "listo" arraaaanca el partido </h3>
-        <button class="btn-hover root color botonListo">Estoy listo<div class="loader" id="loader">...</div></button>
+        <button class="btn-hover root color botonListo">Estoy listo</button>
         <button-start class="button volver">Volver</button-start>
 
         <div class="container-hands">
@@ -195,7 +195,7 @@ customElements.define(
       const buttonListoEl = this.shadow.querySelector(".botonListo");
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton");
-        buttonListoEl.textContent = "Esperando...";
+        buttonListoEl.textContent = `<div class="loader" id="loader">${"Esperando..."}</div>`;
       });
       const goBackButtonEl = this.shadow.querySelector(".volver");
       goBackButtonEl.addEventListener("click", () => {
