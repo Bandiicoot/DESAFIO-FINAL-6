@@ -9,6 +9,14 @@ customElements.define(
     constructor() {
       super();
       this.render();
+
+      let formEl = this.shadow.querySelector(".form-ingresar-sala");
+      formEl.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+        const objeto = Object.fromEntries(formData.entries());
+        state.askRTDBroom(objeto.inputRoomId);
+      });
     }
     render() {
       var style = document.createElement("style");
@@ -64,11 +72,14 @@ customElements.define(
         <div class="container">
    
        <h1 class="title">Piedra Papel ó Tijera</h1>
+       
+       <form class="form-ingresar-sala">
        <h1 class="title"> Ingrese el código </h1>
        <input style="--i:1" placeholder="ID"class="inputs input-name" type="text" name="inputName"  required/>
        <button-start class="buttonNewSala button">Unirse a la sala</button-start>
+       </form>
+
        <div class="container-hands">
-   
        <div class="hand"><movimiento-de-manos hand="piedra"></movimiento-de-manos></div>
        <div class="hand"><movimiento-de-manos hand="papel"></movimiento-de-manos></div>
        <div class="hand"><movimiento-de-manos hand="tijera"></movimiento-de-manos></div>

@@ -115,10 +115,14 @@ router.setRoutes([
     path: "/desafio-final-five/signIn/",
     component: "initsigninpage-comp",
   },
-
+  ////////////////////////////////////////////////////////
   {
     path: "/desafio-final-five/welcome",
     component: "initwelcomepage-comp",
+  },
+  {
+    path: "/desafio-final-five/joinGame",
+    component: "initjoinroom-comp",
   },
   {
     path: "/desafio-final-five/pasarCodigoRoom",
@@ -139,9 +143,5 @@ router.setRoutes([
   {
     path: "/desafio-final-five/results/",
     component: "initresults-comp",
-  },
-  {
-    path: "/desafio-final-five/joinGame",
-    component: "initjoinroom-comp",
   },
 ]);

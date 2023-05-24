@@ -10,6 +10,7 @@ customElements.define(
     constructor() {
       super();
       this.render();
+      state.connectToGameRoom(state.data.currentGame.longRoomId);
     }
 
     render() {
@@ -65,11 +66,11 @@ customElements.define(
       `;
       this.shadow.appendChild(style);
 
-      const buttonEl: any = this.shadow.querySelector(".button");
-      buttonEl.addEventListener("click", () => {
-        Router.go("/desafio-final-five/waitingRoom");
-        // Mandar a sala de espera
-      });
+      // const buttonEl: any = this.shadow.querySelector(".button");
+      // buttonEl.addEventListener("click", () => {
+      //   Router.go("/desafio-final-five/waitingRoom");
+      //   // Mandar a sala de espera
+      // });
     }
   }
 );

@@ -1,5 +1,5 @@
 import { Router } from "@vaadin/router";
-
+import { database, onValue, ref, get } from "./db";
 // import { rtdb } from "./db";
 // import * as router from "./router";
 import { Console } from "console";
@@ -8,7 +8,7 @@ import { createCipheriv } from "crypto";
 // || "https://desafio-final-6-back.onrender.com"; || "http://localhost:3000"
 const API_BASE_URL = process.env.BACK_URL;
 
-// const FRONT_URL = "https://desafio-final-6.onrender.com";
+const FRONT_URL = "https://desafio-final-6.onrender.com";
 
 type Played = "piedra" | "papel" | "tijera";
 
@@ -254,6 +254,61 @@ const state = {
       });
   },
 
+  async connectToGameRoom(longRoomId) {
+    const roomRef = ref(database, "/rooms/" + longRoomId);
+
+    await onValue(roomRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+
+      this.data.currentGame = data.currentGame;
+      if (window.location.href == FRONT_URL + "/desafio-final-five/joinGame") {
+        Router.go("/desafio-final-five/waitingRoom");
+      }
+      if (
+        data.currentGame[Object.keys(data.currentGame)[0]].online == true &&
+        data.currentGame[Object.keys(data.currentGame)[1]].online == true
+      ) {
+        if (
+          window.location.href ==
+          FRONT_URL + "/desafio-final-five/pasarCodigoRoom"
+        ) {
+          this.data.currentGame = data.currentGame;
+          Router.go("/desafio-final-five/waitingRoom");
+        }
+      } else {
+        window.alert(
+          "Esperando que Gojo le gane al Sukuna y a que el contrincante se conecte!"
+        );
+      }
+      if (
+        data.currentGame[Object.keys(data.currentGame)[0]].start == true &&
+        data.currentGame[Object.keys(data.currentGame)[1]].start == true
+      ) {
+        if (
+          window.location.href ==
+          FRONT_URL + "/desafio-final-five/waitingRoom"
+        ) {
+          this.data.currentGame = data.currentGame;
+          Router.go("/desafio-final-five/game");
+        }
+      }
+    });
+  },
+
+  async checkPlayersReady(longRoomId) {
+    await fetch(
+      API_BASE_URL +
+        "/gameRoom/" +
+        longRoomId +
+        "/start/" +
+        this.data.userData.userId,
+      {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+      }
+    );
+  },
   setScore(result) {
     const currentState = this.getState();
 

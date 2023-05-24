@@ -196,19 +196,18 @@ customElements.define(
         <div class="hand"><movimiento-de-manos hand="tijera"></movimiento-de-manos></div>
         
         </div>
-        
+
         </div>`;
       this.shadow.appendChild(style);
 
-      const juanjoCagando = this.shadow.querySelector(
-        ".cargando"
-      ) as HTMLElement;
+      const loadingEl = this.shadow.querySelector(".cargando") as HTMLElement;
 
       const buttonListoEl = this.shadow.querySelector(".botonListo");
       buttonListoEl.addEventListener("click", () => {
         console.log("Estoy tocando el boton listo");
         buttonListoEl.textContent = "Esperando";
-        juanjoCagando.style.display = "flex";
+        loadingEl.style.display = "flex";
+        state.checkPlayersReady(state.data.currentGame.longRoomId);
       });
 
       const goBackButtonEl = this.shadow.querySelector(".volver");
