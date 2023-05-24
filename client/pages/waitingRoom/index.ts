@@ -6,10 +6,10 @@ customElements.define(
   class extends HTMLElement {
     shadow = this.attachShadow({ mode: "open" });
     opponentName: string;
-    connectedCallback() {
-      const currentState = state.getState();
-      this.opponentName = currentState.r;
-    }
+    // connectedCallback() {
+    //   const currentState = state.getState();
+    //   this.opponentName = currentState.r;
+    // }
 
     constructor() {
       super();
