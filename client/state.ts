@@ -261,7 +261,7 @@ const state = {
     );
     console.log(roomRef, "este es el roomRef");
 
-    await onValue(roomRef, (snap) => {
+    let listener = onValue(roomRef, (snap) => {
       console.log("Esta es la roomRef:" + roomRef, "SnapShot", snap);
       //   const data = snap.val();
       //   console.log(data);
@@ -299,6 +299,7 @@ const state = {
       //   }
       // });
     });
+    console.log("Este es el", listener);
   },
 
   async checkPlayersReady(longRoomId) {
