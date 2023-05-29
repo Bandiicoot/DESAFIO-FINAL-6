@@ -256,7 +256,7 @@ const state = {
 
   async connectToGameRoom(longRoomId) {
     const roomRef = ref(database, "rooms/" + longRoomId);
-    console.log(roomRef);
+    console.log(roomRef, "este es el roomRef");
 
     await onValue(roomRef, (snapshot) => {
       const data = snapshot.val();
