@@ -255,10 +255,7 @@ const state = {
   },
 
   async connectToGameRoom(longRoomId) {
-    const roomRef = ref(
-      database,
-      "rooms/" + longRoomId + "/rooms/currenteGame"
-    );
+    const roomRef = ref(database, "rooms/" + longRoomId + "/rooms/currentGame");
     console.log(roomRef, "este es el roomRef");
 
     onValue(roomRef, (snap) => {
