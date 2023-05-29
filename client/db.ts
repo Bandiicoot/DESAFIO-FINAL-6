@@ -4,7 +4,7 @@ import { getDatabase, onValue, ref, get } from "firebase/database";
 const app = initializeApp({
   apiKey: process.env.API_KEY,
   authDomain: process.env.AUTH_DOMAIN,
-  databaseURL: process.env.BACK_URL,
+  databaseURL: process.env.DB_URL,
   //   projectId: "react-firebase-auth",
   //   storageBucket: "react-firebase-auth.appspot.com",
 });

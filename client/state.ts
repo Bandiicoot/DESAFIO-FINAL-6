@@ -257,49 +257,47 @@ const state = {
   async connectToGameRoom(longRoomId) {
     const roomRef = ref(
       database,
-      "/rooms/" + longRoomId + "/rooms/currenteGame"
+      "rooms/" + longRoomId + "/rooms/currenteGame"
     );
     console.log(roomRef, "este es el roomRef");
 
-    let listener = onValue(roomRef, (snap) => {
+    onValue(roomRef, (snap) => {
       console.log("Esta es la roomRef:" + roomRef, "SnapShot", snap);
-      //   const data = snap.val();
-      //   console.log(data);
-      //   this.data.currentGame = data.currentGame;
-      //   if (window.location.href == FRONT_URL + "/desafio-final-five/joinGame") {
-      //     Router.go("/desafio-final-five/waitingRoom");
-      //   }
-      //   if (
-      //     data.currentGame[Object.keys(data.currentGame)[0]].online == true &&
-      //     data.currentGame[Object.keys(data.currentGame)[1]].online == true
-      //   ) {
-      //     if (
-      //       window.location.href ==
-      //       FRONT_URL + "/desafio-final-five/pasarCodigoRoom"
-      //     ) {
-      //       this.data.currentGame = data.currentGame;
-      //       Router.go("/desafio-final-five/waitingRoom");
-      //     }
-      //   } else {
-      //     window.alert(
-      //       "Esperando que Gojo le gane al Sukuna y a que el contrincante se conecte!"
-      //     );
-      //   }
-      //   if (
-      //     data.currentGame[Object.keys(data.currentGame)[0]].start == true &&
-      //     data.currentGame[Object.keys(data.currentGame)[1]].start == true
-      //   ) {
-      //     if (
-      //       window.location.href ==
-      //       FRONT_URL + "/desafio-final-five/waitingRoom"
-      //     ) {
-      //       this.data.currentGame = data.currentGame;
-      //       Router.go("/desafio-final-five/game");
-      //     }
-      //   }
-      // });
+      const data = snap.val();
+      console.log(data);
+      this.data.currentGame = data.currentGame;
+      if (window.location.href == FRONT_URL + "/desafio-final-five/joinGame") {
+        Router.go("/desafio-final-five/waitingRoom");
+      }
+      if (
+        data.currentGame[Object.keys(data.currentGame)[0]].online == true &&
+        data.currentGame[Object.keys(data.currentGame)[1]].online == true
+      ) {
+        if (
+          window.location.href ==
+          FRONT_URL + "/desafio-final-five/pasarCodigoRoom"
+        ) {
+          this.data.currentGame = data.currentGame;
+          Router.go("/desafio-final-five/waitingRoom");
+        }
+      } else {
+        window.alert(
+          "Esperando que Gojo le gane al Sukuna y a que el contrincante se conecte!"
+        );
+      }
+      if (
+        data.currentGame[Object.keys(data.currentGame)[0]].start == true &&
+        data.currentGame[Object.keys(data.currentGame)[1]].start == true
+      ) {
+        if (
+          window.location.href ==
+          FRONT_URL + "/desafio-final-five/waitingRoom"
+        ) {
+          this.data.currentGame = data.currentGame;
+          Router.go("/desafio-final-five/game");
+        }
+      }
     });
-    console.log("Este es el", listener);
   },
 
   async checkPlayersReady(longRoomId) {
