@@ -29,6 +29,7 @@ const state = {
       myScore: 0,
       botScore: 0,
     },
+    actualGame: {},
   },
   listeners: [],
 
@@ -262,19 +263,19 @@ const state = {
       console.log("Esta es la roomRef:" + roomRef, "SnapShot", snap);
       const data = snap.val();
       console.log(data);
-      this.data.currentGame = data.currentGame;
+      this.data.actualGame = data;
       if (window.location.href == FRONT_URL + "/desafio-final-five/joinGame") {
         Router.go("/desafio-final-five/waitingRoom");
       }
       if (
-        data.currentGame[Object.keys(data.currentGame)[0]].online == true &&
-        data.currentGame[Object.keys(data.currentGame)[1]].online == true
+        data[Object.keys(data)[0]].online == true &&
+        data[Object.keys(data)[1]].online == true
       ) {
         if (
           window.location.href ==
           FRONT_URL + "/desafio-final-five/pasarCodigoRoom"
         ) {
-          this.data.currentGame = data.currentGame;
+          this.data.currentGame = data;
           Router.go("/desafio-final-five/waitingRoom");
         }
       } else {
@@ -283,14 +284,14 @@ const state = {
         );
       }
       if (
-        data.currentGame[Object.keys(data.currentGame)[0]].start == true &&
-        data.currentGame[Object.keys(data.currentGame)[1]].start == true
+        data[Object.keys(data)[0]].start == true &&
+        data[Object.keys(data)[1]].start == true
       ) {
         if (
           window.location.href ==
           FRONT_URL + "/desafio-final-five/waitingRoom"
         ) {
-          this.data.currentGame = data.currentGame;
+          this.data.actualGame = data;
           Router.go("/desafio-final-five/game");
         }
       }
