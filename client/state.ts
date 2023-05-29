@@ -259,6 +259,7 @@ const state = {
     console.log(roomRef, "este es el roomRef");
 
     await onValue(roomRef, (snapshot) => {
+      console.log("Esta es la roomRef:" + roomRef, "SnapShot", snapshot);
       const data = snapshot.val();
       console.log(data);
 
