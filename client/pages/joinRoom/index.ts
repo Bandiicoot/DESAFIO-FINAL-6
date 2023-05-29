@@ -90,10 +90,10 @@ customElements.define(
         `;
       this.shadow.appendChild(style);
 
-      const buttonNewSala: any = this.shadow.querySelector(".buttonNewSala");
-      buttonNewSala.addEventListener("click", () => {
-        Router.go("/desafio-final-five/game");
-      });
+      // const buttonNewSala: any = this.shadow.querySelector(".buttonNewSala");
+      // buttonNewSala.addEventListener("click", () => {
+      //   Router.go("/desafio-final-five/game");
+      // });
     }
   }
 );
