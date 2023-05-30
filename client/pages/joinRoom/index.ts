@@ -9,17 +9,6 @@ customElements.define(
     constructor() {
       super();
       this.render();
-
-      let formEl = this.shadow.querySelector(".form-ingresar-sala");
-      console.log("El form:", formEl);
-      formEl.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target as HTMLFormElement);
-        const objeto = Object.fromEntries(formData.entries());
-        console.log(formData);
-        console.log("Este es el obejto:", objeto);
-        state.askRTDBroom(objeto.inputRoomId);
-      });
     }
     render() {
       var style = document.createElement("style");
@@ -97,6 +86,17 @@ customElements.define(
       // buttonNewSala.addEventListener("click", () => {
       //   Router.go("/desafio-final-five/game");
       // });
+
+      let formEl = this.shadow.querySelector(".form-ingresar-sala");
+      console.log("El form:", formEl);
+      formEl.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+        const objeto = Object.fromEntries(formData.entries());
+        console.log(formData);
+        console.log("Este es el obejto:", objeto);
+        state.askRTDBroom(objeto.inputRoomId);
+      });
     }
   }
 );
