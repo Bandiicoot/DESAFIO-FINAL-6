@@ -124,6 +124,29 @@ const state = {
       });
   },
 
+  async joinRoom(dataReceived) {
+    console.log("joinRoom recibio:", dataReceived);
+    await fetch(API_BASE_URL + "/joinRoom/" + "/" + dataReceived.userId, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        userStatus: true,
+        userName: dataReceived.userName,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (
+          data.message ===
+          "Sala llena, intente nuevamente cuando salga Luffy consiga el one piece"
+        ) {
+          window.alert(data.message);
+        }
+      });
+  },
+
   async signup(userSignupData) {
     console.log(userSignupData);
     await fetch(API_BASE_URL + "/signup", {
