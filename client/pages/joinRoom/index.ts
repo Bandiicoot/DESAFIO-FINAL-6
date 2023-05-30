@@ -95,7 +95,7 @@ customElements.define(
         const objeto = Object.fromEntries(formData.entries());
         console.log(formData);
         console.log("Este es el obejto:", objeto);
-        state.askRTDBroom(objeto.inputRoomId);
+        state.askRTDBroom(objeto.inputName);
       });
     }
   }
