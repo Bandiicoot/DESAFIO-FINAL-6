@@ -124,23 +124,36 @@ const state = {
       });
   },
 
-  async joinRoom(dataReceived) {
-    console.log("joinRoom recibio:", dataReceived);
-    await fetch(API_BASE_URL + "/joinRoom/" + "/" + dataReceived.userId, {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        userStatus: true,
-        userName: dataReceived.userName,
-      }),
-    })
+  async joinRoom(dataRecieved) {
+    console.log("joinRoom recibió: ", dataRecieved);
+    await fetch(
+      API_BASE_URL +
+        "/joinroom/" +
+        dataRecieved.longRoomId +
+        "/" +
+        dataRecieved.userId,
+      {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          userStatus: true,
+          userName: dataRecieved.userName,
+        }),
+      }
+    )
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         if (
+          data.message == "Te has unido a la sala!" ||
+          data.message == "Te has conectado a la sala!"
+        ) {
+          window.alert(data.message);
+          this.connectToGameroom(dataRecieved.longRoomId);
+        } else if (
           data.message ===
-          "Sala llena, intente nuevamente cuando salga Luffy consiga el one piece"
+          "Sala llena, o tu nombre no coincide con los participantes"
         ) {
           window.alert(data.message);
         }
