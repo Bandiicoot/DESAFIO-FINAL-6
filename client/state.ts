@@ -94,7 +94,7 @@ const state = {
   ////////////////////////////////////////////////////////////////
   async askRTDBroom(shortRoomIdReceived) {
     console.log("askRTDBRoom Recibió: ", shortRoomIdReceived);
-    await fetch(API_BASE_URL + "/getRoomId/" + shortRoomIdReceived, {
+    await fetch(API_BASE_URL + "/getRtdbRoomId/" + shortRoomIdReceived, {
       method: "GET",
       headers: {
         "content-type": "application/json",
