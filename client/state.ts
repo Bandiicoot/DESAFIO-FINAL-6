@@ -128,7 +128,7 @@ const state = {
     console.log("joinRoom recibió: ", dataRecieved);
     await fetch(
       API_BASE_URL +
-        "/joinroom/" +
+        "/gameRoomsChanges/" +
         dataRecieved.longRoomId +
         "/" +
         dataRecieved.userId,
