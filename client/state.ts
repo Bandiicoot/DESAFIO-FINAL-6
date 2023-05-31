@@ -146,15 +146,12 @@ const state = {
       })
       .then((data) => {
         if (
-          data.message == "Te has unido a la sala!" ||
-          data.message == "Te has conectado a la sala!"
+          data.message == "Te uniste a la sala" ||
+          data.message == "Te conectaste a la sala"
         ) {
           window.alert(data.message);
           this.connectToGameroom(dataRecieved.longRoomId);
-        } else if (
-          data.message ===
-          "Sala llena, o tu nombre no coincide con los participantes"
-        ) {
+        } else if (data.message === "Sala llena") {
           window.alert(data.message);
         }
       });
