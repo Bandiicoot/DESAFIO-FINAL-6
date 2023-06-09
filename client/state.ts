@@ -1,21 +1,22 @@
 import { Router } from "@vaadin/router";
-import { database, onValue, ref, get } from "./db";
+import { database, onValue, ref, get, off } from "./db";
 // import { rtdb } from "./db";
 // import * as router from "./router";
 import { Console } from "console";
 import { createCipheriv } from "crypto";
 //
 // || "https://desafio-final-6-back.onrender.com"; || "http://localhost:3000"
+
+// const API_BASE_URL = "http://localhost:3000";
+
 const API_BASE_URL = process.env.BACK_URL;
-
 const FRONT_URL = "https://desafio-final-6.onrender.com";
-
-type Played = "piedra" | "papel" | "tijera";
 
 const state = {
   data: {
     currentGame: {
       myPlay: "",
+      secondPlayer: "",
       botPlay: "",
       start: "false",
       userName: "",
@@ -24,6 +25,7 @@ const state = {
       shortRoomId: 0,
       longRoomId: 0,
       userPassword: "",
+      finalResult: "",
     },
     history: {
       myScore: 0,
@@ -98,7 +100,6 @@ const state = {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        ////AGREGUE ESTO POR LO DEL CORS
       },
     })
       .then((res) => {
@@ -107,16 +108,17 @@ const state = {
       .then((data) => {
         if (data.message) {
           window.alert(data.message);
-        } else if (data.rtdbRoomid) {
+        } else {
+          console.log("esta es la data rtdbRoomid: ", data.rtdbRoomId);
           let cs = this.getState();
           console.log("currentState: ", cs);
           cs.currentGame.shortRoomId = shortRoomIdReceived;
-          cs.currentGame.longRoomId = data.rtdbRoomid;
+          cs.currentGame.longRoomId = data.rtdbRoomId;
 
           this.setState(cs);
-          // window.alert("Sala encontrada!");
+          window.alert("Sala encontrada!");
           this.joinRoom({
-            longRoomId: data.rtdbRoomid,
+            longRoomId: data.rtdbRoomId,
             userId: this.data.currentGame.userId,
             userName: this.data.currentGame.userName,
           });
@@ -150,7 +152,7 @@ const state = {
           data.message == "Te conectaste a la sala"
         ) {
           window.alert(data.message);
-          this.connectToGameroom(dataRecieved.longRoomId);
+          this.connectToGameRoom(dataRecieved.longRoomId);
         } else if (data.message === "Sala llena") {
           window.alert(data.message);
         }
@@ -288,6 +290,10 @@ const state = {
       });
   },
 
+  returnActualGame() {
+    return this.data.actualGame;
+  },
+
   async connectToGameRoom(longRoomId) {
     const roomRef = ref(database, "rooms/" + longRoomId + "/rooms/currentGame");
     console.log(roomRef, "este es el roomRef");
@@ -297,9 +303,31 @@ const state = {
       const data = snap.val();
       console.log(data);
       this.data.actualGame = data;
+      if (
+        state.data.actualGame[state.data.currentGame.userId] ==
+        state.data.actualGame[Object.keys(data)[0]]
+      ) {
+        this.data.currentGame.myPlay = data[Object.keys(data)[0]].choice;
+
+        this.data.history.myScore = data[Object.keys(data)[0]].score;
+        this.data.history.botScore = data[Object.keys(data)[1]].score;
+        this.data.currentGame.secondPlayer = data[Object.keys(data)[1]].choice;
+        this.data.currentGame.opponentName = data[Object.keys(data)[1]].name;
+      } else if (
+        state.data.actualGame[state.data.currentGame.userId] ==
+        state.data.actualGame[Object.keys(data)[1]]
+      ) {
+        this.data.currentGame.myPlay = data[Object.keys(data)[1]].choice;
+        this.data.history.myScore = data[Object.keys(data)[1]].score;
+        this.data.history.botScore = data[Object.keys(data)[0]].score;
+        this.data.currentGame.secondPlayer = data[Object.keys(data)[0]].choice;
+        this.data.currentGame.opponentName = data[Object.keys(data)[0]].name;
+      }
+      console.log("Este es el current game miau:", this.data);
       if (window.location.href == FRONT_URL + "/desafio-final-five/joinGame") {
         Router.go("/desafio-final-five/waitingRoom");
       }
+
       if (
         data[Object.keys(data)[0]].online == true &&
         data[Object.keys(data)[1]].online == true
@@ -308,13 +336,11 @@ const state = {
           window.location.href ==
           FRONT_URL + "/desafio-final-five/pasarCodigoRoom"
         ) {
-          this.data.currentGame = data;
+          this.data.actualGame = data;
           Router.go("/desafio-final-five/waitingRoom");
         }
       } else {
-        window.alert(
-          "Esperando que Gojo le gane al Sukuna y a que el contrincante se conecte!"
-        );
+        window.alert("Esperando que Gojo le gane al Sukuna");
       }
       if (
         data[Object.keys(data)[0]].start == true &&
@@ -330,52 +356,101 @@ const state = {
       }
     });
   },
-
+  async disconnectToGameRoom(longRoomId) {
+    const roomRefOff = ref(
+      database,
+      "rooms/" + longRoomId + "/rooms/currentGame"
+    );
+    off(roomRefOff);
+  },
   async checkPlayersReady(longRoomId) {
     await fetch(
       API_BASE_URL +
-        "/gameRoom/" +
+        "/gameRooms/" +
         longRoomId +
         "/start/" +
-        this.data.userData.userId,
+        this.data.currentGame.userId,
       {
         method: "PATCH",
         headers: { "content-type": "application/json" },
       }
     );
   },
-  setScore(result) {
-    const currentState = this.getState();
+  async setMove(move) {
+    //console.log("sendChoice por que es el sendChoice sith recibio: ", move);
+    this.sendChoice(move);
+    // const currentState = this.getState();
+    // currentState.currentGame.myPlay = move;
+    // this.setScore();
+  },
+  async sendChoice(choice) {
+    await fetch(API_BASE_URL + "/sendChoice", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        roomId: this.data.currentGame.longRoomId,
+        userId: this.data.currentGame.userId,
+        choice: choice,
+      }),
+    });
+  },
 
+  async setScore(result) {
     if (result == "win") {
-      currentState.history.myScore++;
+      await fetch(API_BASE_URL + "/actualScore", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          roomId: this.data.currentGame.longRoomId,
+          userId: this.data.currentGame.userId,
+        }),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          setTimeout(() => {
+            Router.go("/desafio-final-five/results/");
+          }, 2000);
+        });
     } else if (result == "lose") {
-      currentState.history.botScore++;
+      setTimeout(() => {
+        Router.go("/desafio-final-five/results/");
+      }, 2000);
+    } else if (result == "tie") {
+      setTimeout(() => {
+        Router.go("/desafio-final-five/results/");
+      }, 2000);
     }
-    this.setState(currentState);
   },
 
   restartGame() {
     const currentState = this.getState();
     currentState.currentGame.myPlay = "";
-    currentState.currentGame.botplay = "";
+    currentState.currentGame.secondPlayer = "";
     this.setState(currentState);
   },
 
-  whoWins(myPlay: Played, botPlay: Played) {
-    const ganasteConPapel: boolean = myPlay == "papel" && botPlay == "piedra";
-    const ganasteConTijera: boolean = myPlay == "tijera" && botPlay == "papel";
-    const ganasteConPiedra: boolean = myPlay == "piedra" && botPlay == "tijera";
+  whoWins(myPlay, secondPlayer) {
+    const ganasteConPapel: boolean =
+      myPlay == "papel" && secondPlayer == "piedra";
+    const ganasteConTijera: boolean =
+      myPlay == "tijera" && secondPlayer == "papel";
+    const ganasteConPiedra: boolean =
+      myPlay == "piedra" && secondPlayer == "tijera";
     const ganaste = [
       ganasteConPiedra,
       ganasteConPapel,
       ganasteConTijera,
     ].includes(true);
 
-    const perdisteConPiedra: boolean = myPlay == "piedra" && botPlay == "papel";
-    const perdisteConPapel: boolean = myPlay == "papel" && botPlay == "tijera";
+    const perdisteConPiedra: boolean =
+      myPlay == "piedra" && secondPlayer == "papel";
+    const perdisteConPapel: boolean =
+      myPlay == "papel" && secondPlayer == "tijera";
     const perdisteConTijera: boolean =
-      myPlay == "tijera" && botPlay == "piedra";
+      myPlay == "tijera" && secondPlayer == "piedra";
     const perdiste = [
       perdisteConPiedra,
       perdisteConPapel,
@@ -383,18 +458,15 @@ const state = {
     ].includes(true);
 
     if (ganaste == true) {
-      return "win";
+      this.data.currentGame.finalResult = "win";
+      this.setScore("win");
     } else if (perdiste == true) {
-      return "lose";
+      this.data.currentGame.finalResult = "lose";
+      this.setScore("lose");
     } else {
-      return "tie";
+      this.data.currentGame.finalResult = "tie";
+      this.setScore("tie");
     }
-  },
-
-  setMove(move: Played) {
-    const currentState = this.getState();
-    currentState.currentGame.myPlay = move;
-    this.setScore();
   },
 
   savedData() {

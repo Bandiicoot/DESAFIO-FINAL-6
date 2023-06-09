@@ -2,7 +2,7 @@
   "name": "desafio-final-6",
   "version": "1.0.0",
   "scripts": {
-    "dev:front": "parcel serve ./client/index.html",
+    "nitrodev:front": "parcel serve ./client/index.html",
     "build:front": "parcel build ./client/index.html",
     "build": "yarn build:front"
   },
@@ -21,7 +21,9 @@
     "typescript": "^5.0.4",
     "uuid": "^9.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "process": "^0.11.10"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Bandiicoot/DESAFIO-FINAL-6.git"

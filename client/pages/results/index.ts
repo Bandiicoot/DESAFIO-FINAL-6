@@ -18,17 +18,16 @@ customElements.define(
         empate: require("url:../../images/empate.svg"),
       };
 
-      //   initResults(params) {
       const currentState = state.getState();
-      const whoWins = state.whoWins(
-        currentState.currentGame.myPlay,
-        currentState.currentGame.botPlay
-      );
-      state.setScore(whoWins);
-      state.restartGame();
+      let actualGame = state.returnActualGame();
+      const whoWins = state.data.currentGame.finalResult;
+      // state.setScore(whoWins);
+      // state.restartGame();
 
-      var myScore = state.data.history.myScore;
-      var botScore = state.data.history.botScore;
+      // var myScore = state.data.history.myScore;
+      // var botScore = state.data.history.botScore;
+      var firstPlayer = state.data.currentGame.userName;
+      var secondPlayeer = state.data.currentGame.opponentName;
 
       var style = document.createElement("style");
 
@@ -96,28 +95,38 @@ customElements.define(
         <div class="container">
       
           <div class="victoria">
-            <img class="win-img caret" src=${results.victoria} width= 350px height= 350px></img>
+            <img class="win-img caret" src=${
+              results.victoria
+            } width= 350px height= 350px></img>
           </div>
       
           <div class="derrota">
-            <img class="lose-img caret " src=${results.derrota} width= 350px height= 350px></img>
+            <img class="lose-img caret " src=${
+              results.derrota
+            } width= 350px height= 350px></img>
           </div>
       
           <div class="empate">
-            <img class="tie-img caret " src=${results.empate} width= 350px height= 300px></img>
+            <img class="tie-img caret " src=${
+              results.empate
+            } width= 350px height= 300px></img>
           </div>
       
           <div class="score">
             <h2 class="score-title caret ">Puntuacion</h2>
-            <h3 class="score-participant caret ">Vos :  ${myScore}</h3>
-            <h3 class="score-participant caret ">Skynet :  ${botScore}</h3>
+            <h3 class="score-participant caret ">${
+              actualGame[Object.keys(actualGame)[0]].name
+            } :  ${actualGame[Object.keys(actualGame)[0]].score}</h3>
+            <h3 class="score-participant caret ">${
+              actualGame[Object.keys(actualGame)[1]].name
+            } :  ${actualGame[Object.keys(actualGame)[1]].score}</h3>
           </div>
       
           <div class="go-back">
-            <button-start class="go-back-button caret ">Volver a jugar</button-start>
+            <button-start class="go-back-button caret renew">Volver a jugar</button-start>
           </div>
           <div class="go-back restart">
-            <button-start class="go-back-button caret "> Reiniciar Puntaje</button-start>
+            <button-start class="go-back-button caret "> Volver a inicio </button-start>
           </div>
       
         </div>
@@ -141,23 +150,19 @@ customElements.define(
       }
 
       const goBack: any = this.shadow.querySelector(".go-back");
-
+      const renew: any = this.shadow.querySelector(".renew");
       goBack.addEventListener("click", (e) => {
         e.preventDefault();
-        Router.go("/desafio-final-five/instructions/");
+        renew.textContent = "Esperando";
+        Router.go("/desafio-final-five/waitingRoom");
       });
 
       const resetPoints: any = this.shadow.querySelector(".restart");
 
       resetPoints.addEventListener("click", (e) => {
         e.preventDefault();
-        const newData = state.getState();
-        (newData.history = {
-          myScore: 0,
-          botScore: 0,
-        }),
-          state.setState(newData);
-        Router.go("/desafio-final-five/instructions/");
+        state.disconnectToGameRoom(state.data.currentGame.longRoomId);
+        Router.go("/desafio-final-five/welcome/");
       });
       this.shadow.appendChild(style);
       //   }

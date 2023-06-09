@@ -52,7 +52,7 @@ customElements.define(
   
       <p class="instructions">Enviale este codigo a tu contrincante</p>
       <h1 class="main-title">${state.data.currentGame.shortRoomId}</h1>
-      <button-start class="button">¡Jugar!</button-start>
+     
   
       <div class="container-hands">
   

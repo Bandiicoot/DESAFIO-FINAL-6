@@ -4,3 +4,4 @@ dist
 key.json
 yarn.lock
 .yarn.lock
+.env

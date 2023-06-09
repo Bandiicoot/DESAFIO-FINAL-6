@@ -213,6 +213,7 @@ customElements.define(
       const goBackButtonEl = this.shadow.querySelector(".volver");
 
       goBackButtonEl.addEventListener("click", () => {
+        state.disconnectToGameRoom(state.data.currentGame.longRoomId);
         Router.go("/desafio-final-five/welcome");
       });
     }
